@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-        <a href="" class="logout" title="خروج"></a>
+        <a href="{{route('login.logout')}}" class="logout" title="خروج"></a>
     </div>
 </div>
 @endsection

@@ -28,11 +28,13 @@ class LoginController extends Controller
             $user = User::where(['username' => $request->username, 'status' => 1])->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 $msg = "نام کاربری یا رمز عبور اشتباه است";
+                echo $msg;
                 return redirect(route('login'))->with('error', $msg);
             } else {
                 Auth::login($user);
                 $msg = "با موفقیت وارد شدید";
-                return redirect()->back()->with('success', $msg);
+                echo $msg;
+                return redirect(route('home'));
             }
     }
 
