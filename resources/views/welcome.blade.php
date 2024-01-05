@@ -2,7 +2,6 @@
 
 @extends('admin.theme')
 @section('main')
-<title>قالب پنل مدیریت |نت کپی</title>
 
 
     <div class="breadcrumb">

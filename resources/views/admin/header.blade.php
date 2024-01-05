@@ -23,10 +23,13 @@
     </div>
 
     <ul>
-        <li class="item-li i-dashboard is-active"><a href="index.html">پیشخوان</a></li>
-        <li class="item-li i-courses "><a href="courses.html">تعمیرات</a></li>
-        <li class="item-li i-users"><a href="users.html"> فاکتور</a></li>
-        <li class="item-li i-users"><a href="users.html"> vpn</a></li>
+        <li class="item-li i-dashboard is-active"><a href="{{route('home')}}">پیشخوان</a></li>
+        <li class="item-li i-courses "><a href="{{route('repairs.index')}}">تعمیرات</a></li>
+        <li class="item-li i-users"><a href="{{route('factor.index')}}"> فاکتور</a></li>
+        <li class="item-li i-users"><a href="{{route('bimeh.index')}}"> بیمه</a></li>
+        <li class="item-li i-users"><a href="{{route('apple.index')}}"> apple id</a></li>
+        <li class="item-li i-users"><a href="{{route('gmail.index')}}"> gmail</a></li>
+        <li class="item-li i-users"><a href="{{route('vpn.index')}}"> vpn</a></li>
     </ul>
 
 </div>
@@ -52,3 +55,4 @@
     </div>
 </div>
 @endsection
+<title> پنل مدیریتی</title>
