@@ -3,62 +3,89 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Repairs;
 
 class RepairsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        return view("admin.repairs");
+        $Repairs =  Repairs::paginate(20);
+        return view("admin.repairs" , compact('Repairs'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        try {
+            Repairs::create([
+                'name' => $request->get('name'),
+                'tell' => $request->get('tell'),
+                'model' => $request->get('model'),
+                'imei' => $request->get('emei'),
+                'price' => $request->get('price'),
+                'facestatus' => $request->get('facestatus'),
+                'card' => $request->get('card'),
+                'imei' => $request->get('imei'),
+                'lock' => $request->get('lock'),
+            ]);
+            $msg = " با موفقیت ذخیره شد";
+            return redirect(route('repairs.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('repairs.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+ 
     public function edit(string $id)
     {
-        //
+        $Repairs =  Repairs::paginate(20);
+        $repair = repairs::where('id', $id)->first();
+        return view('admin.repairs', compact('repair','Repairs'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            repairs::find($id)->update(
+                [
+                    'name' => $request->get('name'),
+                    'tell' => $request->get('tell'),
+                    'model' => $request->get('model'),
+                    'imei' => $request->get('emei'),
+                    'price' => $request->get('price'),
+                    'facestatus' => $request->get('facestatus'),
+                    'card' => $request->get('card'),
+                    'imei' => $request->get('imei'),
+                    'lock' => $request->get('lock'),
+                ]
+            );
+            $msg = " با موفقیت ویرایش شد";
+            return redirect(route('repairs.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('repairs.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        Repairs::where('id', $id)->delete();
+        $msg = " با موفقیت حذف شد";
+        return redirect(route('repairs.index'))->with('success', $msg);
     }
 }
