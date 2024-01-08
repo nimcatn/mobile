@@ -3,62 +3,54 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\apple;
 
 class AppleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $apples =  apple::paginate(20);
+        return view("admin.apple" , compact('apples'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request ,apple $apple )
     {
-        //
+        try {
+            $apple->create($request->all());
+            //$bimeh->save();
+            $msg = " با موفقیت ذخیره شد";
+            return redirect(route('apple.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('apple.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $apples =  apple::paginate(20);
+        $apple = apple::where('id', $id)->first();
+        return view('admin.apple', compact('apple','applehs'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, apple $apple)
     {
-        //
+        try {
+            $apple->update($request->all());
+            $msg = " با موفقیت ویرایش شد";
+            return redirect(route('apple.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('apple.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(string $id)
     {
-        //
+        apple::where('id', $id)->delete();
+        $msg = " با موفقیت حذف شد";
+        return redirect(route('apple.index'))->with('success', $msg);
     }
 }
