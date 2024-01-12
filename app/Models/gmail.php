@@ -11,8 +11,15 @@ class gmail extends Model
     protected $table = "niapp_gmail";
     protected $fillable = [
         'name',
+<<<<<<< HEAD
         'username',
         'password',
         'tell',
     ] ;
+=======
+        'tell',
+        'username',
+        'password',
+];
+>>>>>>> c64ed7399d03d6b99260cd9645871b4da0fd3686
 }

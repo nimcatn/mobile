@@ -17,11 +17,9 @@ class AppleController extends Controller
     {
         try {
             $apple->create($request->all());
-            //$bimeh->save();
             $msg = " با موفقیت ذخیره شد";
             return redirect(route('apple.index'))->with('success', $msg);
         } catch (\Throwable $th) {
-            echo $th->getMessage();
             $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
             return redirect(route('apple.index'))->with('error', $msg);
         }
@@ -31,7 +29,7 @@ class AppleController extends Controller
     {
         $apples = apple::paginate(20);
         $apple = apple::where('id', $id)->first();
-        return view('admin.apple', compact('apple', 'apples'));
+        return view('admin.apple', compact('apple','apples'));
     }
 
     public function update(Request $request, apple $apple)

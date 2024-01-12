@@ -15,7 +15,11 @@ $name = Route::currentRouteName();
 
         <div class="row no-gutters  ">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
+<<<<<<< HEAD
                 <p class="box__title">لیست اپل آی دی ها</p>
+=======
+                <p class="box__title">لیست اپل آی دی</p>
+>>>>>>> c64ed7399d03d6b99260cd9645871b4da0fd3686
                 <div class="table__box">
                     <div class="table-box">
                         <table class="table">
@@ -33,6 +37,10 @@ $name = Route::currentRouteName();
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->tell }}</td>
+<<<<<<< HEAD
+=======
+
+>>>>>>> c64ed7399d03d6b99260cd9645871b4da0fd3686
                                         <td>
                                             <table>
                                                 <tr>
@@ -75,8 +83,13 @@ $name = Route::currentRouteName();
                     @csrf
                     <input type="text" placeholder="نام کامل مشتری" class="text" name="name">
                     <input type="text" placeholder="تلفن تماس" class="text" name="tell">
+<<<<<<< HEAD
                     <input type="text" placeholder=" اپل آی دی" class="text" name="username">
                     <input type="text" placeholder="رمز" class="text" name="password">
+=======
+                    <input type="text" placeholder=" اپل آی دی" class="text" name="appleid">
+                    <input type="text" placeholder="رمز اپل آی دی" class="text" name="password">
+>>>>>>> c64ed7399d03d6b99260cd9645871b4da0fd3686
                     <button class="btn btn-netcopy_net">اضافه کردن</button>
                 </form>
             </div>
@@ -89,8 +102,13 @@ $name = Route::currentRouteName();
                     @method('put')
                     <input type="text" placeholder="نام کامل مشتری" class="text" name="name" value="{{$apple->name}}">
                     <input type="text" placeholder="تلفن تماس" class="text" name="tell" value="{{$apple->tell}}">
+<<<<<<< HEAD
                     <input type="text" placeholder=" اپل آی دی" class="text" name="model" value="{{$apple->username}}">
                     <input type="text" placeholder=" رمز" class="text" name="imei" value="{{$apple->password}}">
+=======
+                    <input type="text" placeholder="اپل آی دی" class="text" name="appleid" value="{{$apple->appleid}}">
+                    <input type="text" placeholder="رمز اپل آی دی" class="text" name="password" value="{{$apple->password}}">
+>>>>>>> c64ed7399d03d6b99260cd9645871b4da0fd3686
                     <button class="btn btn-netcopy_net"> ویرایش</button>
                     <a class="btn btn-netcopy_net" href="{{route('apple.index')}}"> بازگشت</a>
                 </form>
