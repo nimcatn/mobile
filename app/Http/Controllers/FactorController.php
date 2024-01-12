@@ -3,62 +3,63 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\factor;
 
 class FactorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $factors = factor::paginate(20);
+        return view("admin.factor", compact('factors'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request, factor $factor)
     {
-        //
+        try {
+            $factor->create($request->all());
+            $msg = " با موفقیت ذخیره شد";
+            return redirect(route('factor.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('factor.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $factors = factor::paginate(20);
+        $factor = factor::where('id', $id)->first();
+        return view('admin.factor', compact('factor', 'factors'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, factor $factor)
     {
-        //
+        try {
+            $factor->update($request->all());
+            $msg = " با موفقیت ویرایش شد";
+            return redirect(route('factor.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('factor.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        factor::where('id', $id)->delete();
+        $msg = " با موفقیت حذف شد";
+        return redirect(route('factor.index'))->with('success', $msg);
     }
+
+    public function create(string $id)
+    {
+        $factors = factor::paginate(20);
+        $factor = factor::where('id', $id)->first();
+        return view('admin.factor', compact('factor', 'factors'));
+    }
+
+
+
 }

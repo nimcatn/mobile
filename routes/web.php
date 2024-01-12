@@ -14,12 +14,12 @@ Route::prefix('/login')->group(function () {
 Route::prefix('/')->middleware('AdminLogin')->group(function () {
     Route::get('/', 'App\Http\Controllers\MainController@index')->name('home');
     Route::resource('/repairs', 'App\Http\Controllers\RepairsController');
-    Route::resource('/factor', 'App\Http\Controllers\FactorController');
+    Route::resource('/factor', 'App\Http\Controllers\FactorController')->except(['create']);
     Route::resource('/bimeh', 'App\Http\Controllers\BimehController');
     Route::resource('/apple', 'App\Http\Controllers\AppleController');
     Route::resource('/gmail', 'App\Http\Controllers\GmailController');
     Route::resource('/vpn', 'App\Http\Controllers\VpnController');
-
+    Route::get('/create/{property}', 'App\Http\Controllers\FactorController@create')->name('factor.create');
 
     // Route::resource('apps', 'App\Http\Controllers\admin\AppController')->except(['show']);
 

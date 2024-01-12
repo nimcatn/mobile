@@ -15,7 +15,7 @@ $name = Route::currentRouteName();
 
         <div class="row no-gutters  ">
             <div class="col-8 margin-left-10 margin-bottom-15 border-radius-3">
-                <p class="box__title">لیست اپل آی دی ها</p>
+                <p class="box__title">لیست فاکتور ها</p>
                 <div class="table__box">
                     <div class="table-box">
                         <table class="table">
@@ -28,7 +28,7 @@ $name = Route::currentRouteName();
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($apples as $item)
+                                @foreach ($factors as $item)
                                     <tr role="row" class="">
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
@@ -37,7 +37,7 @@ $name = Route::currentRouteName();
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <form action="{{ route('apple.destroy', [$item->id]) }}"
+                                                        <form action="{{ route('factor.destroy', [$item->id]) }}"
                                                             method="POST">
                                                             @method('DELETE')
                                                             @csrf
@@ -48,11 +48,11 @@ $name = Route::currentRouteName();
                                                         </form>
                                                     </td>
                                                     <td>
-                                                        <a href="{{ route('apple.edit', $item->id) }}"><span
+                                                        <a href="{{ route('factor.edit', $item->id) }}"><span
                                                                 class="item-edit"></span></a>
                                                     </td>
                                                     <td>
-                                                        <a href="" target="_blank" class="item-eye mlg-15" title="پرینت"></a>
+                                                        <a href="{{ route('factor.create', $item->id) }}" class="item-eye mlg-15" title="مشخصات"></a>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -68,31 +68,41 @@ $name = Route::currentRouteName();
             </div>
 
 
-            @if ($name == 'apple.index')
+            @if ($name == 'factor.index')
             <div class="col-4 bg-white">
-                <p class="box__title">ایجاد اپل آی دی جدید</p>
-                <form action="{{ route('apple.store') }}" method="post" class="padding-30">
+                <p class="box__title">ایجاد فاکتور جدید</p>
+                <form action="{{ route('factor.store') }}" method="post" class="padding-30">
                     @csrf
                     <input type="text" placeholder="نام کامل مشتری" class="text" name="name">
                     <input type="text" placeholder="تلفن تماس" class="text" name="tell">
-                    <input type="text" placeholder=" اپل آی دی" class="text" name="username">
-                    <input type="text" placeholder="رمز" class="text" name="password">
                     <button class="btn btn-netcopy_net">اضافه کردن</button>
                 </form>
             </div>
 
+
+            @elseif ($name == 'factor.create')
+            <div class="col-4 bg-white">
+                <p class="box__title">درج اطلاعات فاکتور</p>
+                <form action="{{ route('factor.update',$factor->id) }}" method="post" class="padding-30">
+                    @csrf
+                    <input type="text" placeholder="عنوان محصول" class="text" name="name" value="{{$factor->name}}">
+                    <input type="text" placeholder=" تعداد" class="text" name="tell" >
+                    <input type="text" placeholder=" قیمت هر عدد" class="text" name="tell" >
+                    <button class="btn btn-netcopy_net"> ویرایش</button>
+                    <a class="btn btn-netcopy_net" href="{{route('factor.index')}}"> بازگشت</a>
+                </form>
+            </div>
             @else
             <div class="col-4 bg-white">
-                <p class="box__title">ویرایش اطلاعات</p>
-                <form action="{{ route('apple.update',$apple->id) }}" method="post" class="padding-30">
+                <p class="box__title">ویرایش  فاکتور</p>
+                <form action="{{ route('factor.update',$factor->id) }}" method="post" class="padding-30">
                     @csrf
                     @method('put')
-                    <input type="text" placeholder="نام کامل مشتری" class="text" name="name" value="{{$apple->name}}">
-                    <input type="text" placeholder="تلفن تماس" class="text" name="tell" value="{{$apple->tell}}">
-                    <input type="text" placeholder=" اپل آی دی" class="text" name="model" value="{{$apple->username}}">
-                    <input type="text" placeholder=" رمز" class="text" name="imei" value="{{$apple->password}}">
+                    <input type="text" placeholder="نام کامل مشتری" class="text" name="name" value="{{$factor->name}}">
+                    <input type="text" placeholder="تلفن تماس" class="text" name="tell" value="{{$factor->tell}}">
+
                     <button class="btn btn-netcopy_net"> ویرایش</button>
-                    <a class="btn btn-netcopy_net" href="{{route('apple.index')}}"> بازگشت</a>
+                    <a class="btn btn-netcopy_net" href="{{route('factor.index')}}"> بازگشت</a>
                 </form>
             </div>
             @endif

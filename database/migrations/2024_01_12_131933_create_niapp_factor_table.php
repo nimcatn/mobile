@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('niapp_apple', function (Blueprint $table) {
+        Schema::create('niapp_factor', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('appleid')->nullable();
-            $table->string('password')->nullable();
-            $table->string('tell')->nullable();
+            $table->string('name');
+            $table->string('tell');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('niapp_apple');
+        Schema::dropIfExists('niapp_factor');
     }
 };

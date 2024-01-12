@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class gmail extends Model
+class factor extends Model
 {
     use HasFactory;
-    protected $table = "niapp_gmail";
+    protected $table = "niapp_factor";
     protected $fillable = [
         'name',
-        'username',
-        'password',
         'tell',
-    ] ;
+    ];
 }
