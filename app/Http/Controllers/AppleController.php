@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\apple;
+use Illuminate\Http\Request;
 
 class AppleController extends Controller
 {
     public function index()
     {
-        $apples =  apple::paginate(20);
-        return view("admin.apple" , compact('apples'));
+        $apples = apple::paginate(20);
+        return view("admin.apple", compact('apples'));
     }
 
-    public function store(Request $request ,apple $apple )
+    public function store(Request $request, apple $apple)
     {
         try {
             $apple->create($request->all());
@@ -29,9 +29,9 @@ class AppleController extends Controller
 
     public function edit(string $id)
     {
-        $apples =  apple::paginate(20);
+        $apples = apple::paginate(20);
         $apple = apple::where('id', $id)->first();
-        return view('admin.apple', compact('apple','applehs'));
+        return view('admin.apple', compact('apple', 'apples'));
     }
 
     public function update(Request $request, apple $apple)
@@ -45,7 +45,6 @@ class AppleController extends Controller
             return redirect(route('apple.index'))->with('error', $msg);
         }
     }
-
 
     public function destroy(string $id)
     {

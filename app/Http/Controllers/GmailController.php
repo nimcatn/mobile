@@ -2,63 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\gmail;
 use Illuminate\Http\Request;
 
 class GmailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $gmails = gmail::paginate(20);
+        return view("admin.gmail", compact('gmails'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request, gmail $gmail)
     {
-        //
+        try {
+            $gmail->create($request->all());
+            $msg = " با موفقیت ذخیره شد";
+            return redirect(route('gmail.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            echo $th->getMessage();
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('gmail.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        $gmails = gmail::paginate(20);
+        $gmail = gmail::where('id', $id)->first();
+        return view('admin.gmail', compact('gmail', 'gmails'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, gmail $gmail)
     {
-        //
+        try {
+            $gmail->update($request->all());
+            $msg = " با موفقیت ویرایش شد";
+            return redirect(route('gmail.index'))->with('success', $msg);
+        } catch (\Throwable $th) {
+            $msg = "خطایی در عملیات ذخیره سازی به وجود آمد";
+            return redirect(route('gmail.index'))->with('error', $msg);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        gmail::where('id', $id)->delete();
+        $msg = " با موفقیت حذف شد";
+        return redirect(route('gmail.index'))->with('success', $msg);
     }
 }
